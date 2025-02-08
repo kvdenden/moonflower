@@ -4,15 +4,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { WalletModule } from './wallet/wallet.module';
 
 import { config as dbConfig } from './database/config';
+import { UsersModule } from './users/users.module';
+import { VaultsModule } from './vaults/vaults.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({ ...dbConfig, autoLoadEntities: true }),
-    WalletModule,
+    UsersModule,
+    VaultsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

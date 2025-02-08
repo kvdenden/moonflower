@@ -26,8 +26,7 @@ export class PrivyAuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
     try {
-      const verifiedClaims = await this.privyClient.verifyAuthToken(authToken);
-      console.log('verifiedClaims', verifiedClaims);
+      request['auth'] = await this.privyClient.verifyAuthToken(authToken);
     } catch {
       throw new UnauthorizedException();
     }
