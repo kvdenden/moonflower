@@ -1691,6 +1691,18 @@
     "@walletconnect/window-getters" "^1.0.1"
     tslib "1.14.1"
 
+"@zerodev/ecdsa-validator@^5.4.3":
+  version "5.4.3"
+  resolved "https://registry.yarnpkg.com/@zerodev/ecdsa-validator/-/ecdsa-validator-5.4.3.tgz#b09acb23acd2276c6f85a91ceff5a496d288197b"
+  integrity sha512-nvIdfWZnbwfxzEmH/q5bLUy1ZNh2L0i/e8Ffz5ALY2NE4GRNZ6SsBpAG1O81XVX+PSjBlmF5pZLxYcQ9I57t9A==
+
+"@zerodev/sdk@^5.4.19":
+  version "5.4.19"
+  resolved "https://registry.yarnpkg.com/@zerodev/sdk/-/sdk-5.4.19.tgz#eb46a91785c3df76b34cc4f4fa1182df01b86265"
+  integrity sha512-8tYv+rQvhyxVnY90fgaJc8q05s2z7rnItI1ugyaOgWLPxlIBOFQ0WA94y8wcBjAG59peImjM13mURb81JB7b9g==
+  dependencies:
+    semver "^7.6.0"
+
 abitype@1.0.8, abitype@^1.0.6:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/abitype/-/abitype-1.0.8.tgz#3554f28b2e9d6e9f35eb59878193eabd1b9f46ba"
@@ -4054,10 +4066,10 @@ pathe@^1.1.2:
   resolved "https://registry.yarnpkg.com/pathe/-/pathe-1.1.2.tgz#6c4cb47a945692e48a1ddd6e4094d170516437ec"
   integrity sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ==
 
-permissionless@^0.2.28:
-  version "0.2.28"
-  resolved "https://registry.yarnpkg.com/permissionless/-/permissionless-0.2.28.tgz#60c8da1c967557a1b950ffc4b9cbffe9c34d1965"
-  integrity sha512-LW7xO9+88aIvCbNktQnY69mZGu7fghuKBKXbEV+sQc1oc62AsbUNUOvAU9SLRByaljrcdC3lJAMGt0kExiGktw==
+permissionless@^0.2.30:
+  version "0.2.30"
+  resolved "https://registry.yarnpkg.com/permissionless/-/permissionless-0.2.30.tgz#00c5de3bf01b870e091e6ec54217aa788bf9a971"
+  integrity sha512-9Uzd8vAK6CXuhKrkDPG2aUyXtYXxAdOVnnvaCCCh4jFA1JTwrJcs4vJ930Plva0J74f9LVGfuZxYJrObCM1f3A==
 
 picocolors@^1.0.0, picocolors@^1.1.1:
   version "1.1.1"
@@ -5206,10 +5218,24 @@ valtio@1.11.2:
     proxy-compare "2.5.1"
     use-sync-external-store "1.2.0"
 
-viem@^2.21.9, viem@^2.22.19:
+viem@^2.21.9:
   version "2.22.19"
   resolved "https://registry.yarnpkg.com/viem/-/viem-2.22.19.tgz#e27d4f9010711e2d55020aef051aa09341900fbf"
   integrity sha512-aGR/NUHaboQ/HoS86wYfJWbXt6aewjhp2OCO2uczCrusgcwXO/qC0l36AcFVw2dkOPBEhIG5oXMEso97L+xHmA==
+  dependencies:
+    "@noble/curves" "1.8.1"
+    "@noble/hashes" "1.7.1"
+    "@scure/bip32" "1.6.2"
+    "@scure/bip39" "1.5.4"
+    abitype "1.0.8"
+    isows "1.0.6"
+    ox "0.6.7"
+    ws "8.18.0"
+
+viem@^2.22.23:
+  version "2.22.23"
+  resolved "https://registry.yarnpkg.com/viem/-/viem-2.22.23.tgz#59949d41fd5a22317bed2cf7ea8e85d74e63fedf"
+  integrity sha512-MheOu+joowphTCfCgdQ9BGU/z1IeHa6/ZIYNVc6KTwDklj671YS87cGv5kRCSU0vAfzN+5wjWyIffM8000KGkQ==
   dependencies:
     "@noble/curves" "1.8.1"
     "@noble/hashes" "1.7.1"

@@ -14,7 +14,6 @@ export class VaultsController {
     @Body('address') address: string,
   ) {
     const { userId } = request['auth'] as { userId: string };
-    // const { address } = request.body as { address: string };
 
     console.log('Registering vault for user', userId, address);
 
