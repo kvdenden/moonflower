@@ -1,6 +1,7 @@
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, OneToOne } from 'typeorm';
 import { Base } from './base.entity';
 import { User } from './user.entity';
+import { AgentWallet } from './agent-wallet.entity';
 
 @Entity('vaults')
 export class Vault extends Base {
@@ -9,4 +10,7 @@ export class Vault extends Base {
 
   @ManyToOne(() => User, (user) => user.vaults, { onDelete: 'CASCADE' })
   user: User;
+
+  @OneToOne(() => AgentWallet, (agentWallet) => agentWallet.vault)
+  agentWallet: AgentWallet;
 }

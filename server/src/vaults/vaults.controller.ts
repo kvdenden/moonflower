@@ -1,11 +1,32 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Req,
+  UseGuards,
+  Param,
+  Patch,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Request } from 'express';
 import { PrivyAuthGuard } from '../auth/privy-auth.guard';
 import { VaultsService } from './vaults.service';
+import { VaultsGuard } from './vaults.guard';
 
 @Controller('vaults')
 export class VaultsController {
   constructor(private vaultsService: VaultsService) {}
+
+  @UseGuards(PrivyAuthGuard)
+  @Get()
+  async getVaults(@Req() request: Request) {
+    const { userId } = request['auth'] as { userId: string };
+
+    const vaults = await this.vaultsService.getVaults(userId);
+
+    return vaults;
+  }
 
   @UseGuards(PrivyAuthGuard)
   @Post()
@@ -15,10 +36,22 @@ export class VaultsController {
   ) {
     const { userId } = request['auth'] as { userId: string };
 
-    console.log('Registering vault for user', userId, address);
-
     const vault = await this.vaultsService.registerVault(userId, address);
 
     return vault;
+  }
+
+  @Get(':vaultId')
+  async getVault(@Param('vaultId') vaultId: string) {
+    return this.vaultsService.getVault(vaultId);
+  }
+
+  @UseGuards(VaultsGuard)
+  @Post(':vaultId/approve')
+  async approveAgentWallet(
+    @Param('vaultId') vaultId: string,
+    @Body('approval') approval: string,
+  ) {
+    return this.vaultsService.approveAgentWallet(vaultId, approval);
   }
 }

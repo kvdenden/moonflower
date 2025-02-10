@@ -30,11 +30,17 @@
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/typeorm": "^11.0.0",
-    "@privy-io/server-auth": "^1.18.4",
+    "@privy-io/server-auth": "^1.18.7",
+    "@zerodev/ecdsa-validator": "^5.4.3",
+    "@zerodev/permissions": "^5.5.1",
+    "@zerodev/remote-signer": "^5.3.1",
+    "@zerodev/sdk": "^5.4.19",
+    "@zerodev/webauthn-key": "^5.4.2",
     "pg": "^8.13.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "viem": "^2.23.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
