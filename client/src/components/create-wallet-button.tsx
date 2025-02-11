@@ -48,7 +48,7 @@ export default function CreateWalletButton() {
   };
 
   return (
-    <Button onClick={registerVault} disabled={disabled}>
+    <Button onClick={() => registerVault()} disabled={disabled}>
       Create wallet
     </Button>
   );
