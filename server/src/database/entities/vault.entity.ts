@@ -5,6 +5,9 @@ import { AgentWallet } from './agent-wallet.entity';
 
 @Entity('vaults')
 export class Vault extends Base {
+  @Column({ default: 0 })
+  index: number;
+
   @Column()
   address: string;
 

@@ -6,7 +6,7 @@ import { useCreateWallet, usePrivy, useWallets } from "@privy-io/react-auth";
 import { getSmartAccountAddress } from "@/web3/smartAccount";
 import { Button } from "@/components/ui/button";
 
-export default function CreateWalletButton() {
+export function CreateWalletButton() {
   const { ready, authenticated, getAccessToken } = usePrivy();
   const { ready: walletsReady, wallets } = useWallets();
   const { createWallet } = useCreateWallet();
@@ -20,13 +20,13 @@ export default function CreateWalletButton() {
 
   const disabled = !ready || (ready && !authenticated);
 
-  const registerVault = async (index: bigint = BigInt(0)) => {
+  const registerVault = async (index: number = 0) => {
     const embeddedWallet = wallets.find((wallet) => wallet.walletClientType === "privy");
     if (!embeddedWallet) {
       throw new Error("Privy wallet not found");
     }
 
-    const smartAccountAddress = await getSmartAccountAddress(embeddedWallet.address as `0x${string}`, index);
+    const smartAccountAddress = await getSmartAccountAddress(embeddedWallet.address as `0x${string}`, BigInt(index));
 
     const accessToken = await getAccessToken();
     const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/vaults", {
@@ -36,6 +36,7 @@ export default function CreateWalletButton() {
         Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
+        index,
         address: smartAccountAddress,
       }),
     });
@@ -53,3 +54,5 @@ export default function CreateWalletButton() {
     </Button>
   );
 }
+
+export default CreateWalletButton;

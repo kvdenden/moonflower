@@ -1,4 +1,4 @@
-import { Entity, Column, OneToOne } from 'typeorm';
+import { Entity, Column, OneToOne, JoinColumn } from 'typeorm';
 import { Base } from './base.entity';
 import { Vault } from './vault.entity';
 
@@ -7,9 +7,10 @@ export class AgentWallet extends Base {
   @Column()
   address: string;
 
-  @Column()
+  @Column({ nullable: true })
   approval: string;
 
   @OneToOne(() => Vault, (vault) => vault.agentWallet, { onDelete: 'CASCADE' })
+  @JoinColumn()
   vault: Vault;
 }

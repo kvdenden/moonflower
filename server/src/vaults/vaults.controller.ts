@@ -6,8 +6,6 @@ import {
   Req,
   UseGuards,
   Param,
-  Patch,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { PrivyAuthGuard } from '../auth/privy-auth.guard';
@@ -32,11 +30,16 @@ export class VaultsController {
   @Post()
   async registerVault(
     @Req() request: Request,
-    @Body('address') address: string,
+    @Body() body: { index: number; address: string },
   ) {
     const { userId } = request['auth'] as { userId: string };
+    const { index, address } = body;
 
-    const vault = await this.vaultsService.registerVault(userId, address);
+    const vault = await this.vaultsService.registerVault(
+      userId,
+      index,
+      address,
+    );
 
     return vault;
   }

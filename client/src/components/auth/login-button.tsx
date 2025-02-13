@@ -3,7 +3,7 @@
 import { usePrivy } from "@privy-io/react-auth";
 import { Button } from "@/components/ui/button";
 
-export default function LoginButton() {
+export function LoginButton() {
   const { ready, authenticated, login } = usePrivy();
 
   const disabled = !ready || (ready && authenticated);
@@ -14,3 +14,5 @@ export default function LoginButton() {
     </Button>
   );
 }
+
+export default LoginButton;

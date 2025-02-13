@@ -15,8 +15,11 @@ export class VaultsService {
   ) {}
 
   async getVaults(userId: string) {
+    const user = await this.usersService.findOrCreateUser(userId);
+
     return this.vaultsRepository.find({
-      where: { user: { id: userId } },
+      where: { user: { id: user.id } },
+      relations: ['agentWallet'],
     });
   }
 
@@ -27,21 +30,21 @@ export class VaultsService {
     });
   }
 
-  async registerVault(userId: string, address: string) {
+  async registerVault(userId: string, index: number, address: string) {
     const user = await this.usersService.findOrCreateUser(userId);
 
     let vault = await this.vaultsRepository.findOne({
-      where: { user, address },
+      where: { user: { id: user.id }, address },
     });
 
     if (!vault) {
-      vault = this.vaultsRepository.create({ user, address });
+      vault = this.vaultsRepository.create({ user, index, address });
       await this.vaultsRepository.save(vault);
 
       await this.agentWalletsService.createAgentWallet(vault.id);
     }
 
-    return vault.id;
+    return this.getVault(vault.id);
   }
 
   async approveAgentWallet(vaultId: string, approval: string) {
