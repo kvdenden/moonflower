@@ -11,11 +11,11 @@ import { max } from "lodash";
 
 export default function Dashboard() {
   const { data: vaults = [], refetch, isPending } = useVaults();
-  const { mutate: registerVault, isPending: isRegistering } = useRegisterVault({
+  const { mutate: registerVault, isPending: isRegistrationPending } = useRegisterVault({
     onSuccess: () => refetch(),
   });
 
-  const vaultIndex = max(vaults.map((v) => v.index + 1)) ?? 0;
+  const nextVaultIndex = max(vaults.map((v) => v.index + 1)) ?? 0;
 
   if (isPending) {
     return (
@@ -38,8 +38,8 @@ export default function Dashboard() {
               You haven&apos;t created any vaults yet. Vaults are smart wallets that allow you to securely store your
               assets and set up automated workflows.
             </p>
-            <Button className="w-full" disabled={isRegistering} onClick={() => registerVault(vaultIndex)}>
-              {isRegistering ? (
+            <Button className="w-full" disabled={isRegistrationPending} onClick={() => registerVault(nextVaultIndex)}>
+              {isRegistrationPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4" /> Creating Vault...
                 </>
@@ -51,16 +51,6 @@ export default function Dashboard() {
             </Button>
           </CardContent>
         </Card>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {vaults.map((vault) => (
-          <Card key={vault.id} className="rounded-xl border bg-card p-6 text-card-foreground shadow-sm">
-            <div className="space-y-2">
-              <h3 className="text-sm font-medium text-muted-foreground">Vault {vault.id}</h3>
-              <div className="text-2xl font-bold">{vault.address}</div>
-            </div>
-          </Card>
-        ))}
       </div>
     </div>
   );

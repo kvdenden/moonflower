@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
-import { registerVault } from "@/api/vaults";
+import { approveAgent } from "@/api/vaults";
 import { useEmbeddedWallet } from "@/hooks/use-embedded-wallet";
 
-export function useRegisterVault(options = {}) {
+export function useApproveAgent(vaultId: string, options = {}) {
   const wallet = useEmbeddedWallet();
 
   return useMutation({
-    mutationFn: async (index: number) => wallet && registerVault(wallet, index),
+    mutationFn: async () => wallet && approveAgent(wallet, vaultId),
     ...options,
   });
 }
