@@ -26,7 +26,7 @@ export class VaultsService {
   async getVault(vaultId: string) {
     return this.vaultsRepository.findOne({
       where: { id: vaultId },
-      relations: ['agentWallet'],
+      relations: ['user', 'agentWallet'],
     });
   }
 

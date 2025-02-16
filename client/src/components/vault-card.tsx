@@ -3,11 +3,15 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"; // adjust import paths as needed
 import { useVault } from "@/hooks/use-vault";
 
-import { Copy, Wallet, CheckCircle2, XCircle, ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { Copy, Wallet, CheckCircle2, XCircle } from "lucide-react";
 import Spinner from "./spinner";
+import { useApproveAgent } from "@/hooks/use-approve-agent";
 
 export default function VaultCard({ vaultId }: { vaultId: string }) {
-  const { data: vault, isPending } = useVault(vaultId);
+  const { data: vault, refetch, isPending } = useVault(vaultId);
+  const { mutate: approveAgent, isPending: isApprovalPending } = useApproveAgent({
+    onSuccess: () => refetch(),
+  });
 
   if (isPending) {
     return (
@@ -76,8 +80,13 @@ export default function VaultCard({ vaultId }: { vaultId: string }) {
                       <XCircle className="h-5 w-5 mr-2" />
                       <span className="font-medium">Not Approved</span>
                     </div>
-                    <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                      Approve Wallet
+                    <Button
+                      size="sm"
+                      className="bg-primary text-primary-foreground hover:bg-primary/90"
+                      onClick={() => approveAgent(vaultId)}
+                      disabled={isApprovalPending}
+                    >
+                      {isApprovalPending ? "Approving..." : "Approve Wallet"}
                     </Button>
                   </div>
                 )}
