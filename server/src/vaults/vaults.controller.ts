@@ -44,9 +44,22 @@ export class VaultsController {
     return vault;
   }
 
+  @UseGuards(VaultsGuard)
   @Get(':vaultId')
   async getVault(@Param('vaultId') vaultId: string) {
     return this.vaultsService.getVault(vaultId);
+  }
+
+  @UseGuards(VaultsGuard)
+  @Get(':vaultId/workflows')
+  async getWorkflows(@Param('vaultId') vaultId: string) {
+    return this.vaultsService.getWorkflows(vaultId);
+  }
+
+  @UseGuards(VaultsGuard)
+  @Post(':vaultId/workflows')
+  async createWorkflow(@Param('vaultId') vaultId: string) {
+    return this.vaultsService.createWorkflow(vaultId);
   }
 
   @UseGuards(VaultsGuard)

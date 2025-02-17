@@ -7,12 +7,14 @@ import { VaultsController } from './vaults.controller';
 import { AuthModule } from '../auth/auth.module';
 import { UsersModule } from '../users/users.module';
 import { AgentWalletsModule } from '../agent-wallets/agent-wallets.module';
+import { WorkflowsModule } from '../workflows/workflows.module';
 
 @Module({
   imports: [
     AuthModule,
     UsersModule,
     AgentWalletsModule,
+    WorkflowsModule,
     TypeOrmModule.forFeature([Vault]),
   ],
   providers: [VaultsService, VaultsGuard],

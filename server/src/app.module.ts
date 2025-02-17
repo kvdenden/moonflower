@@ -11,6 +11,7 @@ import { VaultsModule } from './vaults/vaults.module';
 import { AgentWalletsModule } from './agent-wallets/agent-wallets.module';
 import { Web3Module } from './web3/web3.module';
 import { AuthModule } from './auth/auth.module';
+import { WorkflowsModule } from './workflows/workflows.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     VaultsModule,
     AgentWalletsModule,
+    WorkflowsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
