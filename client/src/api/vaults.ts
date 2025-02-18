@@ -2,7 +2,7 @@ import { approveSessionKey, getSmartAccountAddress } from "@/web3/smartAccount";
 import { ConnectedWallet, getAccessToken } from "@privy-io/react-auth";
 import { EIP1193Provider } from "viem";
 
-type Vault = {
+export type Vault = {
   id: string;
   index: number;
   address: `0x${string}`;

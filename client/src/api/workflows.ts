@@ -1,6 +1,6 @@
 import { getAccessToken } from "@privy-io/react-auth";
 
-type Workflow = {
+export type Workflow = {
   id: string;
 };
 
