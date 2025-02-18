@@ -7,14 +7,10 @@ type Vault = {
   index: number;
   address: `0x${string}`;
   title: string;
-  agentWallet?: {
+  agentWallet: {
     address: `0x${string}`;
     approved: boolean;
   };
-};
-
-type Workflow = {
-  id: string;
 };
 
 function toVault(data: {
@@ -30,12 +26,6 @@ function toVault(data: {
     title: `Vault ${data.index}`,
     agentWallet: { address: data.agentWallet.address, approved: !!data.agentWallet.approval },
   } as Vault;
-}
-
-function toWorkflow(data: { id: string }): Workflow {
-  return {
-    id: data.id,
-  } as Workflow;
 }
 
 export async function fetchVaults() {
@@ -64,20 +54,6 @@ export async function fetchVault(vaultId: string) {
 
   const vault = await response.json();
   return toVault(vault);
-}
-
-export async function fetchWorkflows(vaultId: string) {
-  const accessToken = await getAccessToken();
-  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/vaults/${vaultId}/workflows`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!response.ok) throw new Error("Failed to fetch workflows");
-
-  const workflows: [] = await response.json();
-  return workflows.map((w) => toWorkflow(w));
 }
 
 export async function registerVault(wallet: ConnectedWallet, index: number) {
